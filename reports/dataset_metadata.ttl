@@ -1,0 +1,144 @@
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+
+# =============================================================================
+# Dataset Metadata: Coteq Electricity 2013
+# Vocabulary: DCAT 2.0 / Dublin Core Terms / PROV-O
+# Note: Unknown or unverified attributes are explicitly marked rather than guessed.
+# =============================================================================
+
+<http://example.org/dataset/coteq-electricity-2013>
+    a dcat:Dataset ;
+    # Identifier (Placeholder URI pending persistent DOI / handle registration)
+    dcterms:identifier "http://example.org/dataset/coteq-electricity-2013"^^xsd:anyURI ;
+    rdfs:comment "Identifier is a local placeholder URI (example.org) pending registration with a persistent identifier service (e.g. Zenodo DOI or w3id.org)."@en ;
+
+    # Descriptive Metadata
+    dcterms:title "Dutch Electricity Consumption Dataset - Coteq Netbeheer (2013)"@en ;
+    dcterms:description "Tabular electricity consumption records collected by regional network manager Coteq Netbeheer B.V. for 2013 across municipalities in Overijssel, Netherlands. Transformed from raw CSV into RDF (Turtle) using OpenRefine according to the Dutch Electricity Ontology, comprising 2,503 energy records and 46,236 triples."@en ;
+    dcterms:subject <http://id.loc.gov/authorities/subjects/sh85042316> ; # Electric power consumption
+    dcat:theme <http://eurovoc.europa.eu/670> ; # Electricity consumption
+    dcat:keyword "electricity"@en , "energy consumption"@en , "smart meters"@en , "network operator"@en ,
+                 "elektriciteitsverbruik"@nl , "Coteq"@nl , "netbeheerder"@nl ;
+
+    # Language & Spatial / Temporal Coverage
+    dcterms:language <http://id.loc.gov/vocabulary/iso639-1/nl> , <http://id.loc.gov/vocabulary/iso639-1/en> ;
+    dcterms:spatial "Overijssel, Netherlands (Municipalities including Almelo, Goor, Enter, Oldenzaal)"@en ;
+    dcterms:temporal [
+        a dcterms:PeriodOfTime ;
+        dcat:startDate "2013-01-01"^^xsd:date ;
+        dcat:endDate   "2013-12-31"^^xsd:date ;
+        rdfs:comment "Covers annual energy consumption data for calendar year 2013."@en ;
+    ] ;
+
+    # Provenance & Agents (Only verified agents included)
+    dcterms:creator [
+        a foaf:Organization ;
+        foaf:name "Coteq Netbeheer B.V." ;
+        rdfs:comment "Regional network operator responsible for electricity distribution and grid data collection in the service area."@en ;
+    ] ;
+    dcterms:contributor [
+        a foaf:Person ;
+        foaf:name "Mahesh" ;
+        rdfs:comment "FAIR data researcher responsible for semantic ontology design in Protégé and RDF transformation in OpenRefine."@en ;
+    ] ;
+    # Publisher of the original CSV distribution: Marked explicitly as unverified
+    dcterms:publisher [
+        a foaf:Agent ;
+        foaf:name "Unverified / Unknown" ;
+        rdfs:comment "The primary open data portal or publishing institution distributing the original CSV dataset is unverified from the local files."@en ;
+    ] ;
+
+    # Dates
+    dcterms:created "2026-10-23"^^xsd:date ; # Date of OpenRefine RDF export
+    dcterms:modified "2026-10-24"^^xsd:date ; # Date of SHACL validation & metadata generation
+    # Original publication date of CSV: unverified
+    rdfs:comment "The original publication date of the raw CSV by Coteq is unverified from the source file."@en ;
+
+    # Licence: Explicitly unverified, NOT assumed without evidence
+    dcterms:license [
+        a dcterms:LicenseDocument ;
+        rdfs:label "Unverified / Unknown Licence" ;
+        rdfs:comment "No formal licence declaration (e.g., CC0, CC-BY, ODbL) was supplied with the raw CSV archive. A permissive licence is NOT assumed without verifiable evidence from the rights holder."@en ;
+    ] ;
+
+    # Provenance derivation
+    prov:wasDerivedFrom <http://example.org/dataset/coteq-electricity-2013/distribution/csv> ;
+
+    # Conformance & Linked Schemas
+    dcterms:conformsTo <http://example.org/dutch-energy-ontology> ;
+
+    # Distributions
+    dcat:distribution <http://example.org/dataset/coteq-electricity-2013/distribution/ttl> ;
+    dcat:distribution <http://example.org/dataset/coteq-electricity-2013/distribution/csv> ;
+
+    # Validation relations
+    dcat:qualifiedRelation [
+        a dcat:Relationship ;
+        dcat:hadRole <http://example.org/roles/validationShape> ;
+        dcterms:relation <http://example.org/coteq/shapes> ;
+    ] ;
+    dcat:qualifiedRelation [
+        a dcat:Relationship ;
+        dcat:hadRole <http://example.org/roles/validationReport> ;
+        dcterms:relation <http://example.org/dataset/coteq-electricity-2013/validation-report> ;
+    ] .
+
+
+# =============================================================================
+# Distribution 1: RDF Turtle Semantic Distribution
+# =============================================================================
+<http://example.org/dataset/coteq-electricity-2013/distribution/ttl>
+    a dcat:Distribution ;
+    dcterms:title "RDF Turtle Distribution of Coteq Electricity 2013 Data"@en ;
+    dcterms:description "Transformed RDF graph serialized in Turtle syntax containing 2,503 energy records, measurements, street, and location nodes."@en ;
+    dcat:mediaType "text/turtle"^^xsd:string ;
+    dcterms:format "text/turtle" ;
+    dcat:downloadURL <file:///rdf/coteq_electricity_2013_csv%20(1).ttl> ;
+    dcat:byteSize 3323862 ;
+    dcterms:conformsTo <http://example.org/dutch-energy-ontology> ;
+    dcterms:issued "2026-10-23"^^xsd:date .
+
+
+# =============================================================================
+# Distribution 2: Raw CSV Source Distribution
+# =============================================================================
+<http://example.org/dataset/coteq-electricity-2013/distribution/csv>
+    a dcat:Distribution ;
+    dcterms:title "Raw CSV Source Distribution of Coteq Electricity 2013 Data"@en ;
+    dcterms:description "Original tabular source file containing 2,503 records of electricity consumption in Overijssel."@en ;
+    dcat:mediaType "text/csv"^^xsd:string ;
+    dcterms:format "text/csv" ;
+    dcat:downloadURL <file:///data/raw/coteq_electricity_2013.csv> ;
+    dcat:byteSize 326853 ;
+    dcterms:issued "2013-12-31"^^xsd:date ;
+    rdfs:comment "Issued date reflects end of reporting period; exact original publishing date is unverified."@en .
+
+
+# =============================================================================
+# Associated Resources (Ontology, Shapes, Report)
+# =============================================================================
+<http://example.org/dutch-energy-ontology>
+    a owl:Ontology ;
+    dcterms:title "Dutch Electricity Domain Ontology"@en ;
+    dcterms:description "Domain ontology defining classes (EnergyRecord, EnergyMeasurement, Location, Street, NetworkManager) and properties for regional electricity grid data."@en ;
+    rdfs:seeAlso <file:///ontology/dutch_electricity_ontology.owx> .
+
+<http://example.org/coteq/shapes>
+    a rdfs:Resource ;
+    dcterms:title "SHACL Shapes for Coteq Electricity Dataset"@en ;
+    dcterms:description "SHACL constraint shapes specifying cardinality, datatype, regex, closed shapes, and SPARQL business rules."@en ;
+    rdfs:seeAlso <file:///shacl/coteq_electricity_shapes.ttl> .
+
+<http://example.org/dataset/coteq-electricity-2013/validation-report>
+    a dcat:Distribution ;
+    dcterms:title "SHACL Validation Report for Coteq Electricity 2013 Dataset"@en ;
+    dcterms:description "Validation outcome report confirming Conforms: True across 46,236 triples and 2,503 records with 0 violations."@en ;
+    dcterms:format "text/plain" ;
+    rdfs:seeAlso <file:///reports/shacl_validation_report.txt> .

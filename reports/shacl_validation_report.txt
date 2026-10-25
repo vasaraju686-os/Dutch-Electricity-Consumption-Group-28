@@ -1,0 +1,21 @@
+======================================================================
+SHACL VALIDATION REPORT
+======================================================================
+Timestamp (UTC):    2026-10-25T01:12:45.264617+00:00
+Data file:          C:\FAIR-Data-Point\data\rdf\coteq_electricity_2013_csv (1).ttl
+Shapes file:        C:\FAIR-Data-Point\coteq_electricity_shapes.ttl
+Data triple count:  46236
+Shapes triple count:163
+Validation runtime: 94.13 seconds
+Advanced features:  True
+----------------------------------------------------------------------
+CONFORMANCE RESULT: True
+VIOLATIONS COUNT:   0
+----------------------------------------------------------------------
+Success: No SHACL violations found in the dataset (Violations count: 0).
+----------------------------------------------------------------------
+Note on validation scope:
+Conformance indicates that the dataset satisfies all constraint components defined
+in the supplied SHACL shapes file. It does not guarantee the complete absence of data
+quality issues beyond the properties and constraints modeled in these shapes.
+======================================================================

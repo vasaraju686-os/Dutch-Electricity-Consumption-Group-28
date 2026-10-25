@@ -1,0 +1,162 @@
+@prefix de: <http://example.org/dutch-energy-ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# =============================================================================
+# Shared resources
+# =============================================================================
+<http://example.org/coteq/network-manager/CoteqNetbeheerBV>
+    rdf:type de:NetworkManager .
+
+<http://example.org/coteq/street/Teststraat>
+    rdf:type de:Street .
+
+# =============================================================================
+# Record 1: Deliberate error -> Postcode wrong format ("7608H")
+# Expect: Violation of sh:pattern "^[0-9]{4}[A-Z]{2}$" on de:zipCodeFrom
+# =============================================================================
+<http://example.org/coteq/record/coteq-electricity-2013-0001>
+    rdf:type             de:EnergyRecord ;
+    de:recordIdentifier  "coteq-electricity-2013-0001" ;
+    de:city              "ALMELO" ;
+    de:purchaseArea      "Netbeheerder Centraal Overijssel B.V." ;
+    de:zipCodeFrom       "7608H" ;
+    de:zipCodeTo         "7608HB" ;
+    de:hasMeasurement    <http://example.org/coteq/measurement/coteq-electricity-2013-0001> ;
+    de:locatedIn         <http://example.org/coteq/location/7608HB-7608HB> ;
+    de:hasStreet         <http://example.org/coteq/street/Teststraat> ;
+    de:managedBy         <http://example.org/coteq/network-manager/CoteqNetbeheerBV> .
+
+<http://example.org/coteq/measurement/coteq-electricity-2013-0001>
+    rdf:type                                 de:EnergyMeasurement ;
+    de:numberOfConnections                   "20"^^xsd:int ;
+    de:smartMeterPercentage                  "0"^^xsd:double ;
+    de:activeConnectionsPercentage           "100"^^xsd:double ;
+    de:deliveryPercentage                    "100"^^xsd:double ;
+    de:annualConsumptionLowTariffPercentage  "100"^^xsd:double ;
+    de:annualConsumption                     "3000"^^xsd:double .
+
+<http://example.org/coteq/location/7608HB-7608HB>
+    rdf:type de:Location .
+
+# =============================================================================
+# Record 2: Deliberate error -> deliveryPercentage = 150
+# Expect: Violation of sh:maxInclusive 100 on de:deliveryPercentage
+# =============================================================================
+<http://example.org/coteq/record/coteq-electricity-2013-0002>
+    rdf:type             de:EnergyRecord ;
+    de:recordIdentifier  "coteq-electricity-2013-0002" ;
+    de:city              "ALMELO" ;
+    de:purchaseArea      "Netbeheerder Centraal Overijssel B.V." ;
+    de:zipCodeFrom       "7608HA" ;
+    de:zipCodeTo         "7608HA" ;
+    de:hasMeasurement    <http://example.org/coteq/measurement/coteq-electricity-2013-0002> ;
+    de:locatedIn         <http://example.org/coteq/location/7608HA-7608HA> ;
+    de:hasStreet         <http://example.org/coteq/street/Teststraat> ;
+    de:managedBy         <http://example.org/coteq/network-manager/CoteqNetbeheerBV> .
+
+<http://example.org/coteq/measurement/coteq-electricity-2013-0002>
+    rdf:type                                 de:EnergyMeasurement ;
+    de:numberOfConnections                   "15"^^xsd:int ;
+    de:smartMeterPercentage                  "0"^^xsd:double ;
+    de:activeConnectionsPercentage           "100"^^xsd:double ;
+    de:deliveryPercentage                    "150"^^xsd:double ;
+    de:annualConsumptionLowTariffPercentage  "100"^^xsd:double ;
+    de:annualConsumption                     "2500"^^xsd:double .
+
+<http://example.org/coteq/location/7608HA-7608HA>
+    rdf:type de:Location .
+
+# =============================================================================
+# Record 3: Deliberate error -> Two hasMeasurement values
+# Expect: Violation of sh:maxCount 1 on de:hasMeasurement
+# =============================================================================
+<http://example.org/coteq/record/coteq-electricity-2013-0003>
+    rdf:type             de:EnergyRecord ;
+    de:recordIdentifier  "coteq-electricity-2013-0003" ;
+    de:city              "ALMELO" ;
+    de:purchaseArea      "Netbeheerder Centraal Overijssel B.V." ;
+    de:zipCodeFrom       "7608HC" ;
+    de:zipCodeTo         "7608HC" ;
+    de:hasMeasurement    <http://example.org/coteq/measurement/coteq-electricity-2013-0003a> ;
+    de:hasMeasurement    <http://example.org/coteq/measurement/coteq-electricity-2013-0003b> ;
+    de:locatedIn         <http://example.org/coteq/location/7608HC-7608HC> ;
+    de:hasStreet         <http://example.org/coteq/street/Teststraat> ;
+    de:managedBy         <http://example.org/coteq/network-manager/CoteqNetbeheerBV> .
+
+<http://example.org/coteq/measurement/coteq-electricity-2013-0003a>
+    rdf:type                                 de:EnergyMeasurement ;
+    de:numberOfConnections                   "10"^^xsd:int ;
+    de:smartMeterPercentage                  "0"^^xsd:double ;
+    de:activeConnectionsPercentage           "100"^^xsd:double ;
+    de:deliveryPercentage                    "100"^^xsd:double ;
+    de:annualConsumptionLowTariffPercentage  "100"^^xsd:double ;
+    de:annualConsumption                     "1800"^^xsd:double .
+
+<http://example.org/coteq/measurement/coteq-electricity-2013-0003b>
+    rdf:type                                 de:EnergyMeasurement ;
+    de:numberOfConnections                   "12"^^xsd:int ;
+    de:smartMeterPercentage                  "0"^^xsd:double ;
+    de:activeConnectionsPercentage           "100"^^xsd:double ;
+    de:deliveryPercentage                    "95"^^xsd:double ;
+    de:annualConsumptionLowTariffPercentage  "100"^^xsd:double ;
+    de:annualConsumption                     "2100"^^xsd:double .
+
+<http://example.org/coteq/location/7608HC-7608HC>
+    rdf:type de:Location .
+
+# =============================================================================
+# Record 4: Deliberate error -> zipCodeFrom greater than zipCodeTo
+# Expect: SPARQL constraint violation "zipCodeFrom must be <= zipCodeTo."
+# =============================================================================
+<http://example.org/coteq/record/coteq-electricity-2013-0004>
+    rdf:type             de:EnergyRecord ;
+    de:recordIdentifier  "coteq-electricity-2013-0004" ;
+    de:city              "ALMELO" ;
+    de:purchaseArea      "Netbeheerder Centraal Overijssel B.V." ;
+    de:zipCodeFrom       "7608HZ" ;
+    de:zipCodeTo         "7608HA" ;
+    de:hasMeasurement    <http://example.org/coteq/measurement/coteq-electricity-2013-0004> ;
+    de:locatedIn         <http://example.org/coteq/location/7608HZ-7608HA> ;
+    de:hasStreet         <http://example.org/coteq/street/Teststraat> ;
+    de:managedBy         <http://example.org/coteq/network-manager/CoteqNetbeheerBV> .
+
+<http://example.org/coteq/measurement/coteq-electricity-2013-0004>
+    rdf:type                                 de:EnergyMeasurement ;
+    de:numberOfConnections                   "18"^^xsd:int ;
+    de:smartMeterPercentage                  "0"^^xsd:double ;
+    de:activeConnectionsPercentage           "100"^^xsd:double ;
+    de:deliveryPercentage                    "90"^^xsd:double ;
+    de:annualConsumptionLowTariffPercentage  "100"^^xsd:double ;
+    de:annualConsumption                     "2700"^^xsd:double .
+
+<http://example.org/coteq/location/7608HZ-7608HA>
+    rdf:type de:Location .
+
+# =============================================================================
+# Record 5: Deliberate error -> Missing de:city
+# Expect: Violation of sh:minCount 1 on de:city
+# =============================================================================
+<http://example.org/coteq/record/coteq-electricity-2013-0005>
+    rdf:type             de:EnergyRecord ;
+    de:recordIdentifier  "coteq-electricity-2013-0005" ;
+    # de:city is deliberately omitted
+    de:purchaseArea      "Netbeheerder Centraal Overijssel B.V." ;
+    de:zipCodeFrom       "7608HD" ;
+    de:zipCodeTo         "7608HD" ;
+    de:hasMeasurement    <http://example.org/coteq/measurement/coteq-electricity-2013-0005> ;
+    de:locatedIn         <http://example.org/coteq/location/7608HD-7608HD> ;
+    de:hasStreet         <http://example.org/coteq/street/Teststraat> ;
+    de:managedBy         <http://example.org/coteq/network-manager/CoteqNetbeheerBV> .
+
+<http://example.org/coteq/measurement/coteq-electricity-2013-0005>
+    rdf:type                                 de:EnergyMeasurement ;
+    de:numberOfConnections                   "22"^^xsd:int ;
+    de:smartMeterPercentage                  "0"^^xsd:double ;
+    de:activeConnectionsPercentage           "100"^^xsd:double ;
+    de:deliveryPercentage                    "88"^^xsd:double ;
+    de:annualConsumptionLowTariffPercentage  "100"^^xsd:double ;
+    de:annualConsumption                     "3100"^^xsd:double .
+
+<http://example.org/coteq/location/7608HD-7608HD>
+    rdf:type de:Location .

@@ -1,0 +1,47 @@
+
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix de: <http://example.org/dutch-energy-ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+de:EnergyRecordShape
+    a sh:NodeShape ;
+    sh:targetClass de:EnergyRecord ;
+    sh:property [
+        sh:path de:recordIdentifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path de:hasMeasurement ;
+        sh:class de:EnergyMeasurement ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path de:hasStreet ;
+        sh:class de:Street ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path de:locatedIn ;
+        sh:class de:Location ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path de:managedBy ;
+        sh:class de:NetworkManager ;
+        sh:minCount 1 ;
+    ] .
+
+de:EnergyMeasurementShape
+    a sh:NodeShape ;
+    sh:targetClass de:EnergyMeasurement ;
+    sh:property [
+        sh:path de:annualConsumption ;
+        sh:datatype xsd:double ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path de:numberOfConnections ;
+        sh:datatype xsd:int ;
+        sh:minCount 1 ;
+    ] .
